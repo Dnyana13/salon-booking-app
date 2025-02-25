@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Payment</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Make a Payment</h1>
+    <a href="/appointment-booking" class="back-button">Back</a>
+</header>
+
+<section>
+    <h2>Booking Details</h2>
+    <p>Salon: <span th:text="${booking.salon.name}"></span></p>
+    <p>Service: <span th:text="${booking.service.name}"></span></p>
+    <p>Price: ₹<span th:text="${booking.service.price}"></span></p>
+    <p>Date & Time: <span th:text="${booking.date}"></span> at <span th:text="${booking.time}"></span></p>
+
+    <h2>Select Payment Method</h2>
+    <form action="#" th:action="@{/process-payment}" method="post">
+        <input type="hidden" name="bookingId" th:value="${booking.id}">
+
+        <label>
+            <input type="radio" name="paymentMethod" value="credit_card" required> Credit/Debit Card
+        </label>
+        <label>
+            <input type="radio" name="paymentMethod" value="upi"> UPI
+        </label>
+        <label>
+            <input type="radio" name="paymentMethod" value="net_banking"> Net Banking
+        </label>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</section>
+</body>
+</html>

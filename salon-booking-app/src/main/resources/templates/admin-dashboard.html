@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Admin Dashboard</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<section>
+    <h2>Manage Services</h2>
+    <a href="/add-service">Add New Service</a>
+    <table>
+        <tr>
+            <th>Service Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="service : ${services}">
+            <td th:text="${service.name}"></td>
+            <td th:text="${service.price}"></td>
+            <td>
+                <a th:href="@{/edit-service/{id}(id=${service.id})}">Edit</a> |
+                <a th:href="@{/delete-service/{id}(id=${service.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h2>Manage Appointments</h2>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.user.name}"></td>
+            <td th:text="${appointment.service.name}"></td>
+            <td th:text="${appointment.date}"></td>
+            <td th:text="${appointment.time}"></td>
+            <td th:text="${appointment.status}"></td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Salon Booking - Home</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Salon Booking System</h1>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/signup}">Sign Up</a>
+    </nav>
+</header>
+
+<section>
+    <h2>Find a Salon</h2>
+    <form th:action="@{/search}" method="get">
+        <label>
+            <input type="text" name="query" placeholder="Search by name or location">
+        </label>
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<section>
+    <h2>Salon Listings</h2>
+    <div th:if="${salons != null and !salons.isEmpty()}">
+        <div th:each="salon : ${salons}">
+            <h3 th:text="${salon.name}"></h3>
+            <p th:text="${salon.address}"></p>
+            <p>Rating: <span th:text="${salon.rating}"></span></p>
+            <a th:href="@{/salon/{id}(id=${salon.id})}">View Details</a>
+        </div>
+    </div>
+    <p th:if="${salons == null or salons.isEmpty()}">No salons available.</p>
+</section>
+</body>
+</html>
